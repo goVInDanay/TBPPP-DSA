@@ -1,0 +1,11 @@
+class Solution {
+    public int singleNumber(int[] nums) {
+        return findNum(nums, 0);
+    }
+    private int findNum(int nums[], int i){
+        if(i == nums.length){
+            return 0;
+        }
+        return nums[i] ^ findNum(nums, i + 1);
+    }
+}
