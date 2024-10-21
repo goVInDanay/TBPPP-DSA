@@ -1,0 +1,23 @@
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        int n = s.length();
+        if(n != goal.length()){
+            return false;
+        }
+        for(int i = 0; i < n; i++){
+            if(rotation(s, goal, i)){
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean rotation(String s, String t, int i){
+        int n = s.length();
+        for(int j = 0; j < n; j++){
+            if(s.charAt(j) != t.charAt((j + i) % n)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
