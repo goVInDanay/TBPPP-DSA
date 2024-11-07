@@ -1,0 +1,34 @@
+class Solution {
+    public int islandPerimeter(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+        boolean[][] vis = new boolean[n][m];
+        int peri = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 1 && !vis[i][j]) {
+                    peri += dfs(i, j, grid, vis);
+                }
+            }
+        }
+        return peri;
+    }
+    private int dfs(int row, int col, int[][] grid, boolean[][] vis) {
+        int n = grid.length;
+        int m = grid[0].length;
+        vis[row][col] = true;
+        int peri = 0;
+        int r[] = {-1, 0, 1, 0};
+        int c[] = {0, -1, 0, 1};
+        for (int i = 0; i < 4; i++) {
+            int R = row + r[i];
+            int C = col + c[i];
+            if (R < 0 || R >= n || C < 0 || C >= m || grid[R][C] == 0) {
+                peri++;
+            } else if (!vis[R][C] && grid[R][C] == 1) {
+                peri += dfs(R, C, grid, vis);
+            }
+        }
+        return peri;
+    }
+}
